@@ -74,6 +74,7 @@
 
 input {
     width: 100%;
+    display: inline;
 }
 </style>
 </head>
@@ -94,7 +95,7 @@ input {
             	<c:choose>
             		<c:when test="${not empty id }">
             			<a href="">${id }님 로그인</a>
-            			<a href="logout.do">logout</a>
+            			<a href="javascript:logout()">logout</a>
             		</c:when>
             		<c:otherwise>
             			<a id="login" href="#openModal">Login</a>
@@ -129,14 +130,14 @@ input {
 	 	</div>
 	</div>
 
-	<div class="modalDialog" id="openModal2" style="display:none">
+	<div class="modalDialog" id="openModal2" style="display:none;">
 	 	<div>
 	 		<a href="#close" title="Close" class="close">X</a>
-	 		<form action="signup.do" method="post">
+	 		<form id="signupForm" action="signup.do" method="post">
 	 			<label for="id">id</label>
-	 			<input type="text" id="id" name="id" /><br />
+	 			<input type="text" id="id" name="id"/><br />
 	 			<label for="pwd">password</label>
-	 			<input type="text" id="pwd" name="pwd" />
+	 			<input type="text" id="pwd" name="pwd" /><br />
 	 			<label for="name">name</label>
 	 			<input type="text" id="name" name="name" />
 	 			<button type="submit">signup</button>
@@ -178,6 +179,66 @@ input {
 		});
 		return false;
 	});
+	
+	function logout(){
+		if(confirm("로그아웃 하시겠습니까?") ==true){
+			location.href="logout.do";
+		}
+	}
+	$("#signupForm").submit(function(){
+		var id =$("#openModal2 input#id").val();
+		var pwd =$("#openModal2 input#pwd").val();
+		var name =$("#openModal2 input#name").val();
+		if(id == ""){
+			alert("아이디를 입력하세요!");
+			
+			return false;
+		}else if(pwd == ""){
+			alert("비밀번호를 입력하세요");
+			
+			return false;
+		}else if(name == ""){
+			alert("이름을 입력하세요");
+			
+			return false;
+		}
+		$(this).submit();
+	});
+	$("#openModal2 input#id").keyup(function(){
+		
+		var id =$("#openModal2 input#id");
+		
+	
+		$.ajax({
+			url: "idCheck.do",
+			type: "post",
+			data: $("#signupForm").serialize(),
+			success: function(data){
+				id.siblings().remove("p");
+				console.log(data.result);
+				if(data.result){
+					id.after("<p class='nosubmit' style='color: red;'>이미 가입된 아이디 입니다.</p>");
+					
+					
+				}else{
+					if(id.val()==""){
+						id.after("<p class='nosubmit' style='color: red;'>아이디를 입력하세요.</p>");
+					}else{
+						id.after("<p style='color: green;'>사용 가능한 아이디입니다.</p>");
+					}	
+					
+				}
+			}
+		});
+		
+		$("#signupForm").submit(false);
+	});
+	$("#openModal2 input#id").focusout(function(){
+		if($("p").hasClass("nosubmit")){
+			$("#openModal2 input#id").val("");
+		}
+	});
+	
 </script>
 </body>
 </html>

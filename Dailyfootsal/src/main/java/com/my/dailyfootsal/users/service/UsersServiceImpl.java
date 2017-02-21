@@ -23,4 +23,11 @@ public class UsersServiceImpl implements UsersService{
 		boolean success =usersDao.exist(dto);
 		return success;
 	}
+
+	@Override
+	public boolean idCheck(UsersDto dto) {
+		 
+		
+		return usersDao.idCheck(dto);
+	}
 }

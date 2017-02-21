@@ -11,4 +11,10 @@
 		FROM d_users
 		WHERE id = #{id} AND pwd = #{pwd}
 	</select>
+	
+	<select id="idCheck" parameterType="usersDto" resultType="usersDto">
+		SELECT id,pwd
+		FROM d_users
+		WHERE id = #{id}
+	</select>
 </mapper>

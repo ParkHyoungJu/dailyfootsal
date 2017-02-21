@@ -51,4 +51,18 @@ public class UsersController {
 		return "redirect:/home.do";
 	}
 	
+	@RequestMapping("/idCheck")
+	@ResponseBody
+	public Map<String, Object> idCheck(@ModelAttribute UsersDto dto){
+		boolean success = usersService.idCheck(dto);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(success){
+			map.put("result", true);
+		}else{
+			map.put("result", false);
+		}
+	
+		return map;
+	}
+	
 }

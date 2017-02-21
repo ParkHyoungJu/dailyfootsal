@@ -26,6 +26,17 @@ public class UsersDaoImpl implements UsersDao{
 		}
 		return success;
 	}
+
+	@Override
+	public boolean idCheck(UsersDto dto) {
+		UsersDto resultDto = session.selectOne("users.idCheck",dto);
+		boolean success=false;
+		if(resultDto !=null){
+			success = true;
+		}
+		
+		return success;
+	}
 	
 	
 }

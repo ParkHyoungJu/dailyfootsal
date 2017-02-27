@@ -17,6 +17,7 @@
 
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/demo.css" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/style1.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/modernizr.custom.86080.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.1.1.js"></script>
 <style>
@@ -76,6 +77,41 @@ input {
     width: 100%;
     display: inline;
 }
+
+.page1{
+	-webkit-animation: pageAni 2s 1 linear;
+	background-color:#FFFFFF;
+	opacity: 0.9;
+	height: 500px;
+}
+@-webkit-keyframes pageAni{
+	0%{
+		background-color:#000000;
+		opacity: 0.1;
+		height: 10px;
+	}
+
+	30%{
+		background-color:#333333;
+		opacity: 0.3;
+		height: 100px;
+	}
+	50%{
+		background-color:#666666;
+		opacity: 0.5;
+		height: 250px;
+	}
+	70%{
+		background-color:#AAAAAA;
+		opacity: 0.7;
+		height: 350px;
+	}
+	100%{
+		background-color:#FFFFFF;
+		opacity: 0.9;
+		height: 500px;
+	}
+}
 </style>
 </head>
 <body id="page">
@@ -88,8 +124,8 @@ input {
 	<div class="container">
 	<!-- Codrops top bar -->
         <div class="codrops-top">
-            <a href="http://tympanus.net/Development/RockingLetters/">
-                <strong>&laquo; Previous Demo: </strong>Rocking Letters with CSS3 &amp; jQuery
+            <a href="home.do">
+                <i class="fa fa-futbol-o" aria-hidden="true"></i>
             </a>
             <span class="right">
             	<c:choose>
@@ -110,12 +146,13 @@ input {
             <h1>All of <span>DailyFootsal</span></h1>
             <h2>Genius is one percent inspiration, ninety-nine percent perspiration</h2>
 			<p class="codrops-demos">
-				<a href="javascript:" class="current-demo">1</a>
+				<a href="javascript:page1Click();">1</a>
 				<a href="javascript:">2</a>
 				<a href="javascript:">3</a>
 				<a href="map.html">Map</a>
 			</p>
         </header>
+        <jsp:include page="page1.jsp"/>
 	</div>
 	<div class="modalDialog" id="openModal" style="display:none">
 	 	<div>
@@ -215,7 +252,6 @@ input {
 			data: $("#signupForm").serialize(),
 			success: function(data){
 				id.siblings().remove("p");
-				console.log(data.result);
 				if(data.result){
 					id.after("<p class='nosubmit' style='color: red;'>이미 가입된 아이디 입니다.</p>");
 					
@@ -239,6 +275,14 @@ input {
 		}
 	});
 	
+	function page1Click(){
+		var page1 = $(".page1");
+		if(page1.css("display") == "none"){
+			$(".page1").show();
+		}else{
+			$(".page1").hide();
+		}
+	}
 </script>
 </body>
 </html>

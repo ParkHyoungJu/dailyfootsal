@@ -39,4 +39,9 @@ public class BoardController {
 		
 		return "redirect:home.do";
 	}
+	
+	@RequestMapping("detail")
+	public String detail(){
+		return "detail";
+	}
 }

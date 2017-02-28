@@ -22,5 +22,14 @@
 	<input type="text" id="title" name="title"/>
 	<label for="contents">내용</label>
 	<div class="textwrapper"><textarea name="contents" id="contents" cols="2" rows="25"></textarea></div>
-	<button type="submit" id="insertBtn">저장</button>
+	<button id="insertBtn">저장</button>
 </form>
+<script>
+$("#insertBtn").click(function(){
+	if(confirm("저장하시겠습니까?") ==true){
+		$(this).parent().submit();
+	}
+	return false;
+});
+	
+</script>

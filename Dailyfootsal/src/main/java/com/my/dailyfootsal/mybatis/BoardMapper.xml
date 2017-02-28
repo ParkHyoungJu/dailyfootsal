@@ -4,6 +4,7 @@
 	<select id="getList" resultType="boardDto">
 		SELECT num,title,name,contents,regdate
 		FROM d_board
+		ORDER BY num DESC
 	</select>
 	
 	<insert id="insert" parameterType="boardDto">

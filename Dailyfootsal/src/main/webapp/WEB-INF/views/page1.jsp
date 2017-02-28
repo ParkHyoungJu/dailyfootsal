@@ -45,10 +45,15 @@
 		 border-bottom: 1px solid #e5e5e5;
 	}
 	
+	tbody td p{
+		cursor: pointer;
+	}
 </style>
 <div class="page1" style="display: none;">
 	<div id="boardcss_list_add_button_table">
-		<p id="newBtn" class="add_button">새글 쓰기</p>
+		<c:if test="${not empty id }">
+			<p id="newBtn" class="add_button">새글 쓰기</p>
+		</c:if>
 	</div>
 	<div class="board_list_table">
 		<table class="list_table">
@@ -72,7 +77,9 @@
 				<tr height="1" bgcolor="#e5e5e5"><td colspan="4"></td></tr>
 					<tr>
 						<td>${tmp.num}</td>
-						<td>${tmp.title}</td>
+						<td>
+							<p onclick="detailPage(${tmp.num})">${tmp.title}</p>
+						</td>
 						<td>${tmp.name}</td>
 						<td>${tmp.regdate}</td>
 					</tr>
@@ -93,4 +100,17 @@ $("#newBtn").click(function(){
 		}
 	});
 });
+
+function detailPage(num){
+	$(".board_list_table").hide();
+	
+	$.ajax({
+		url: "detail.do",
+		type: "GET",
+		success : function(data){
+			$(".page1").html(data);
+		}
+	});
+}
+
 </script>

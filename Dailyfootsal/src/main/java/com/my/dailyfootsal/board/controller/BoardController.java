@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.my.dailyfootsal.board.dto.BoardDto;
@@ -18,8 +19,8 @@ public class BoardController {
 	private BoardService boardService;
 	
 	@RequestMapping("home")
-	public ModelAndView home() {
-		ModelAndView mView = boardService.getList();
+	public ModelAndView home(@RequestParam(defaultValue="1") int pageNum) {
+		ModelAndView mView = boardService.getList(pageNum);
 		
 		
 		mView.setViewName("home");
@@ -41,7 +42,18 @@ public class BoardController {
 	}
 	
 	@RequestMapping("detail")
-	public String detail(){
-		return "detail";
+	public ModelAndView detail(@RequestParam int num){
+		ModelAndView mView =boardService.getData(num);
+		mView.setViewName("detail");
+		
+		return mView;
+	}
+	
+	@RequestMapping("page1")
+	public ModelAndView page1(@RequestParam(defaultValue="1") int pageNum){
+		ModelAndView mView = boardService.getList(pageNum);
+		mView.setViewName("page1");
+		
+		return mView;
 	}
 }

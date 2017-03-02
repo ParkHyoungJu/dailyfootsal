@@ -48,6 +48,20 @@
 	tbody td p{
 		cursor: pointer;
 	}
+	.page_display a{
+		text-decoration: none;
+		color: #000;
+		cursor: pointer;
+	}
+	.page_display a.active{
+		font-weight: bold;
+		color: red;
+		text-decoration: underline;
+	}
+	
+	.page_display a.muted{
+		color: #cecece;
+	}
 </style>
 <div class="page1" style="display: none;">
 	<div id="boardcss_list_add_button_table">
@@ -78,7 +92,7 @@
 					<tr>
 						<td>${tmp.num}</td>
 						<td>
-							<p onclick="detailPage(${tmp.num})">${tmp.title}</p>
+							<p id="detailtBtn" onclick="detailPage(${tmp.num})">${tmp.title}</p>
 						</td>
 						<td>${tmp.name}</td>
 						<td>${tmp.regdate}</td>
@@ -86,9 +100,40 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<!-- 페이지 디스플레이 출력 -->
+		<div class="page_display">
+			<c:choose>
+				<c:when test="${startPageNum ne 1 }">
+					<a onclick="paging(${startPageNum-1 })">[ 이전 ]</a>
+				</c:when>
+				<c:otherwise>
+					<a class="muted" href="javascript:">[ 이전 ]</a>
+				</c:otherwise>
+			</c:choose>
+		
+			<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+				<c:choose>
+					<c:when test="${i eq pageNum }">
+						<a class="active">${i }</a>
+					</c:when>
+					<c:otherwise>
+						<a onclick="paging(${i })">${i }</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:choose>
+				<c:when test="${endPageNum lt totalPageCount }">
+					<a onclick="paging(${endPageNum+1})">[ 다음 ]</a>
+				</c:when>
+				<c:otherwise>
+					<a class="muted" href="javascript:">[ 다음 ]</a>
+				</c:otherwise>
+			</c:choose>
+		</div>
 	</div>
 </div>
 <script>
+
 $("#newBtn").click(function(){
 	$(this).hide();
 	$(".board_list_table").hide();
@@ -102,15 +147,24 @@ $("#newBtn").click(function(){
 });
 
 function detailPage(num){
-	$(".board_list_table").hide();
-	
 	$.ajax({
-		url: "detail.do",
+		url: "detail.do?num="+num,
 		type: "GET",
 		success : function(data){
 			$(".page1").html(data);
 		}
 	});
+}
+
+function paging(pageNum){
+	$.ajax({
+		url: "page1.do?pageNum="+pageNum,
+		method: "GET",
+		success: function(data){
+			$("#p1").html(data);
+			page1Click();
+		}
+	})
 }
 
 </script>

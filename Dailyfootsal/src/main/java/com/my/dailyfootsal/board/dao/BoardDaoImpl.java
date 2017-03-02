@@ -15,8 +15,8 @@ public class BoardDaoImpl implements BoardDao{
 	private SqlSession session;
 
 	@Override
-	public List<BoardDto> getList() {
-		List<BoardDto> list = session.selectList("board.getList");
+	public List<BoardDto> getList(BoardDto dto) {
+		List<BoardDto> list = session.selectList("board.getList",dto);
 		
 		return list;
 	}
@@ -25,5 +25,20 @@ public class BoardDaoImpl implements BoardDao{
 	public void insert(BoardDto dto) {
 		session.insert("board.insert",dto);
 		
+	}
+
+	@Override
+	public BoardDto getData(int num) {
+		BoardDto dto =session.selectOne("board.getData", num);
+		
+		return dto;
+	}
+
+	//전체 글 갯수를 리턴하는 메소드
+	@Override
+	public int getCount() {
+		int count = session.selectOne("board.getCount");
+		
+		return count;
 	}
 }

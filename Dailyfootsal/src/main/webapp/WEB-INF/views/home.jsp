@@ -79,10 +79,10 @@ input {
 }
 
 .page1{
-	-webkit-animation: pageAni 2s 1 linear;
+	-webkit-animation: pageAni 1s 1 linear;
 	background-color:#FFFFFF;
 	opacity: 0.9;
-	height: 500px;
+	height: 550px;
 }
 @-webkit-keyframes pageAni{
 	0%{
@@ -109,7 +109,7 @@ input {
 	100%{
 		background-color:#FFFFFF;
 		opacity: 0.9;
-		height: 500px;
+		height: 550px;
 	}
 }
 </style>
@@ -152,7 +152,9 @@ input {
 				<a href="map.html">Map</a>
 			</p>
         </header>
-        <jsp:include page="page1.jsp"/>
+        <div id="p1">
+        	<jsp:include page="page1.jsp"/>
+        </div>
 	</div>
 	<div class="modalDialog" id="openModal" style="display:none">
 	 	<div>

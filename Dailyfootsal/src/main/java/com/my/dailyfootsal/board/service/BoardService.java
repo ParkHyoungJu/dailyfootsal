@@ -7,5 +7,5 @@ import com.my.dailyfootsal.board.dto.BoardDto;
 public interface BoardService {
 	public ModelAndView getList(int pageNum);
 	public void insert(BoardDto dto);
-	public ModelAndView getData(int num);
+	public ModelAndView getData(int num,int pageNum);
 }

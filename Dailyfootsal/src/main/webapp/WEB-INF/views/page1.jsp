@@ -92,7 +92,7 @@
 					<tr>
 						<td>${tmp.num}</td>
 						<td>
-							<p id="detailtBtn" onclick="detailPage(${tmp.num})">${tmp.title}</p>
+							<p id="detailtBtn" onclick="detailPage(${tmp.num},${pageNum })">${tmp.title}</p>
 						</td>
 						<td>${tmp.name}</td>
 						<td>${tmp.regdate}</td>
@@ -146,9 +146,9 @@ $("#newBtn").click(function(){
 	});
 });
 
-function detailPage(num){
+function detailPage(num,pageNum){
 	$.ajax({
-		url: "detail.do?num="+num,
+		url: "detail.do?num="+num+"&pageNum="+pageNum,
 		type: "GET",
 		success : function(data){
 			$(".page1").html(data);

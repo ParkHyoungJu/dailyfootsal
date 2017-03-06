@@ -42,8 +42,8 @@ public class BoardController {
 	}
 	
 	@RequestMapping("detail")
-	public ModelAndView detail(@RequestParam int num){
-		ModelAndView mView =boardService.getData(num);
+	public ModelAndView detail(@RequestParam int num,@RequestParam int pageNum){
+		ModelAndView mView =boardService.getData(num,pageNum);
 		mView.setViewName("detail");
 		
 		return mView;

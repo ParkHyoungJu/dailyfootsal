@@ -71,10 +71,11 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public ModelAndView getData(int num) {
+	public ModelAndView getData(int num,int pageNum) {
 		BoardDto dto =boardDao.getData(num);
 		ModelAndView mView = new ModelAndView();
 		mView.addObject("dto", dto);
+		mView.addObject("pageNum",pageNum);
 		
 		return mView;
 	}

@@ -7,7 +7,7 @@
 	}
 </style>
 <div id="detailDiv">
-	<button style="float: left" id="backBtn">뒤로가기</button>
+	<button style="float: left" onclick="back(${pageNum})">뒤로가기</button>
 	<div class="board_list_table">
 		<table class="list_table">
 			<caption>${dto.name }님의 작성글</caption>
@@ -38,14 +38,14 @@
 </div>
 
 <script>
-	$("#backBtn").click(function(){
+	function back(pageNum){
 		$.ajax({
-			url: "page1.do",
+			url: "page1.do?pageNum="+pageNum,
 			method: "GET",
 			success : function(data){
 				$("#p1").html(data);
 				page1Click();
 			}
 		});
-	});
+	}
 </script>

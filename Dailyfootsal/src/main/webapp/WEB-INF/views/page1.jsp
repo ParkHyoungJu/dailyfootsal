@@ -80,7 +80,7 @@
 			</colgroup>
 			<thead>
 				<tr>
-					<th>번호</th>
+					<th style="margin-left: 30px;">번호</th>
 					<th>제목</th>
 					<th>이름</th>
 					<th>등록일자</th>

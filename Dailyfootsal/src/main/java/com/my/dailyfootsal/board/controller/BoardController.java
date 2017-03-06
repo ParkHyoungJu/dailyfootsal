@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.my.dailyfootsal.board.dto.BoardDto;
+import com.my.dailyfootsal.board.service.BoardCommentService;
 import com.my.dailyfootsal.board.service.BoardService;
 
 @Controller

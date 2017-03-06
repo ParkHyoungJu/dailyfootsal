@@ -7,12 +7,14 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<typeAliases>
 		<typeAlias type="com.my.dailyfootsal.users.dto.UsersDto" alias="usersDto"/>
 		<typeAlias type="com.my.dailyfootsal.board.dto.BoardDto" alias="boardDto"/>
+		<typeAlias type="com.my.dailyfootsal.board.dto.BoardCommentDto" alias="boardCommentDto"/>
 	</typeAliases>
 	
 	<!-- sql 문을 정의하고 있는 xml 문서 정보 -->
 	<mappers>
 		<mapper resource="com/my/dailyfootsal/mybatis/UsersMapper.xml"/>
 		<mapper resource="com/my/dailyfootsal/mybatis/BoardMapper.xml"/>
+		<mapper resource="com/my/dailyfootsal/mybatis/BoardCommentMapper.xml"/>
 	</mappers>
 </configuration>
 
